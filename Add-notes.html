@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+    
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item active">
+                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="dashboard.html">Home</a>
+                </li>
+
+                <li class="nav-item  active">
+                    <a class="nav-link" href="Add-notes.html">Add Notes</a>
+                </li>
+                <li class="nav-item  active">
+                    <a class="nav-link" href="Manage-notes.html">manage notes</a>
+                </li>
+                <li class="nav-item  active">
+                    <a class="nav-link" href="search-notes.html">Search Notes</a>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="container">
+      <form action="" method="post" name="frm" onsubmit="addnotes(event)">
+            <div class="form-group">
+                <label for="">Title</label>
+                <input type="text" class="form-control" id="title">
+            </div>
+            <div class="form-group">
+                <label for="">description</label>
+                <textarea id="description" class="form-control"></textarea>
+                
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-dark">Add Note</button>
+            </div>
+        </form>
+    </div>  
+    <script>
+        function addnotes(event){
+            event.preventDefault();
+            let localdata = localStorage.getItem("notesapp");
+            console.log(localdata);
+            if(localdata != null){
+                arr = JSON.parse(localdata)
+            }
+            else{
+                arr = []
+            }
+            console.log(arr)
+
+            let title = document.getElementById("title").value;
+            let desc = document.getElementById("description").value;
+
+            arr.push({"notes_title":title , "description":desc});
+            // console.log(arr);
+            localStorage.setItem("notesapp",JSON.stringify(arr));
+            frm.reset();
+        }
+    </script>
+</body>
+</html>
